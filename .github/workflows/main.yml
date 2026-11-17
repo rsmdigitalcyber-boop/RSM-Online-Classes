@@ -14,9 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extract New Logo Project
-        run: unzip -o RSM_ONLINE_CLASSES_USER_LOGO.zip -d project
-
+      - - name: Extract New Logo Project
+  run: unzip -o RSM_ONLINE_CLASSES_REDESIGNED_PROJECT_FIXED.zip -d project
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
