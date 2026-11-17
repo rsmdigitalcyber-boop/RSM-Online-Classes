@@ -14,8 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extract Project
-        run: unzip -o RSM_ONLINE_CLASSES_Android_Source.zip -d project
+      - name: Extract New Logo Project
+        run: unzip -o RSM_ONLINE_CLASSES_USER_LOGO.zip -d project
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -28,19 +28,13 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Fix JVM Target Version
-        run: |
-          cd project
-          echo "android { compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 } }" >> app/build.gradle
-
       - name: Build APK
         run: |
-          cd project
+          cd project/rsm_apk_src
           gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: RSM-ONLINE-CLASSES-APK
-          path: project/app/build/outputs/apk/debug/app-debug.apk
-
+          name: RSM-ONLINE-CLASSES-NEW-APK
+          path: project/rsm_apk_src/app/build/outputs/apk/debug/app-debug.apk
