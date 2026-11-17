@@ -23,11 +23,15 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-    
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
+
+      - name: Fix JVM Target Version
+        run: |
+          cd project
+          echo "android { compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 } }" >> app/build.gradle
 
       - name: Build APK
         run: |
@@ -39,3 +43,4 @@ jobs:
         with:
           name: RSM-ONLINE-CLASSES-APK
           path: project/app/build/outputs/apk/debug/app-debug.apk
+
